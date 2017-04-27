@@ -1,10 +1,36 @@
 #!/usr/bin/python
 from itertools import chain
 import itertools
-import MySQLdb
 import subprocess
 import time
+import os
+import sys
 
+#Function for installing packages
+def install(name):
+    subprocess.call(['pip', 'install', name])
+
+#Make sure MySQLdb is installed
+try:
+    import MySQLdb
+except ImportError:
+    os.system("sudo yum install gcc mysql-devel")
+    install('MySQL-python')
+    
+#Make sure termcolor is installed so we can use 'colored'
+try:
+    from termcolor import colored 
+except ImportError:
+     install('termcolor')
+     from termcolor import colored
+
+    
+# Create a class for 'bold' text
+class color:
+    BOLD = '\033[1m'
+    END = '\033[0m'
+
+    
 #Notice
 print "*** NOTE: Please ensure that the user you use is either root or has super user privileges ***\n"
 
@@ -21,22 +47,6 @@ db_pass = "".join(db_pass.split())
 #Let user know we are about to do things
 print "\n Thank you. Querying database...\n"
 time.sleep(2)
-
-# Create a class for 'bold' text
-class color:
-    BOLD = '\033[1m'
-    END = '\033[0m'
-
-#Function for installing packages
-def install(name):
-    subprocess.call(['pip', 'install', name])
-
-#Make sure termcolor is installed so we can use 'colored'
-try:
- from termcolor import colored 
-except ImportError:
-  install('termcolor')
-  from termcolor import colored
 
 #Set Connection Parameters
 connection = MySQLdb.connect(
