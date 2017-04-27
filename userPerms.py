@@ -13,12 +13,12 @@ db_host = raw_input("Database Host:") or 'localhost'
 db_user = raw_input("Databse User:") or 'root'
 db_pass = raw_input("Database Password:")
 
-
+#Stip whitespace from user input
 db_host = "".join(db_host.split())
 db_user = "".join(db_user.split())
 db_pass = "".join(db_pass.split())
 
-
+#Let user know we are about to do things
 print "\n Thank you. Querying database...\n"
 time.sleep(2)
 
@@ -85,7 +85,7 @@ for user, host in user_host.iteritems():
     host = host
     print user.ljust(25)[:25] + host
 
-
+#Set up permissions heading
 print "\n"
 print "-------------------------------"
 print color.BOLD + 'Permissions on each user:' + color.END
