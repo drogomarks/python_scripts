@@ -16,6 +16,7 @@ try:
 except ImportError:
     os.system("sudo yum install gcc mysql-devel")
     install('MySQL-python')
+    import MySQLdb
     
 #Make sure termcolor is installed so we can use 'colored'
 try:
