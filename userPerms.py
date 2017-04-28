@@ -1,4 +1,9 @@
 #!/usr/bin/python
+""" This is a smiple Python script that will take DB user, host and password from the user to query MySQL database
+    and obtain a list of it's users. It then checks the permissions on those users given the that information. 
+    Script WILL install mysql-devel and gcc as well as termcolor and MySQL-python via pip if not present. 
+    Should be run as root user and the db user should have at least select on ALL databases """
+
 from itertools import chain
 import itertools
 import subprocess
