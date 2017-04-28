@@ -6,6 +6,22 @@ import time
 import os
 import sys
 
+#determine the distro
+rhel_based= ['amazon', 'centos', 'redhat']
+debian_based = ['ubuntu', 'debian']
+
+
+with open("/etc/issue") as f:
+    distro = f.read().lower().split()[0]
+    if distro in rhel_based:
+        pkg_mgr = "yum"
+    elif distro in debian_based:
+        pkg_mgr = "apt-get"
+    else:
+        print colored('ERROR!', 'red') + " Unsupported Distribution!"
+        sys.exit()
+
+
 #Function for installing packages
 def install(name):
     subprocess.call(['pip', 'install', name])
