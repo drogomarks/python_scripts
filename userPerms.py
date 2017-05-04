@@ -1,7 +1,7 @@
 #!/usr/bin/python
 """ This is a smiple Python script that will take DB user, host and password from the user to query MySQL database
-    and obtain a list of it's users. It then checks the permissions on those users given the that information. 
-    Script WILL install mysql-devel and gcc as well as termcolor and MySQL-python via pip if not present. 
+    and obtain a list of it's users. It then checks the permissions on those users given the that information.
+    Script WILL install mysql-devel and gcc as well as termcolor and MySQL-python via pip if not present.
     Should be run as root user and the db user should have at least select on ALL databases """
 
 from itertools import chain
@@ -35,24 +35,25 @@ def install(name):
 try:
     import MySQLdb
 except ImportError:
-    os.system("sudo yum install gcc mysql-devel")
+    cmd = "sudo %s install gcc mysql-devel" % pkg_mgr
+    os.system(cmd)
     install('MySQL-python')
     import MySQLdb
-    
+
 #Make sure termcolor is installed so we can use 'colored'
 try:
-    from termcolor import colored 
+    from termcolor import colored
 except ImportError:
      install('termcolor')
      from termcolor import colored
 
-    
+
 # Create a class for 'bold' text
 class color:
     BOLD = '\033[1m'
     END = '\033[0m'
 
-    
+
 #Notice
 print "*** NOTE: Please ensure that the user you use is either root or has super user privileges ***\n"
 
@@ -90,7 +91,7 @@ results = cursor.fetchall()
 #Create empty list
 mylist = []
 
-#Populate list with each item from query results 
+#Populate list with each item from query results
 for item in results:
     mylist.append(item)
 
